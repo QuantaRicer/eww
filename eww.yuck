@@ -1,63 +1,104 @@
-(defwidget bar []
-  (centerbox :orientation "h"
-    (workspaces)
-    (music)
-    (sidestuff)))
+;; Variables section
+(defpoll volume :interval "1s"
+    "scripts/getvol")
+(defpoll time :interval "1s"
+    "date '+%H:%M %b %d, %Y'")
 
-(defwidget sidestuff []
-    (box :class "sidestuff" :orientation "h" :space-evenly false :halign "end"
+;; Listener
+(deflisten current_window_title :initial ""
+    "scripts/hypr-title.sh")
+
+;; Common widgets
+(defwidget workspace_button [onclick]
+    (box :class "workspace_button"
+        :orientation "h"
+        :halign: "center"
+        (button :onclick onclick
+            (label :markup "")
+        )
+    )
+)
+
+(defwidget metric [label value onchange]
+    (box :orientation "h"
+        :class "metric"
+        :space-evenly false
+        (box :class "label" label)
+        (scale :min 0
+            :max 100
+            :active {onchange != ""}
+            :value value
+            :onchange onchange
+        )
+    )
+)
+
+(defwidget workspace_buttons []
+    (box :class "workspace_buttons"
+        :orientation "h"
+        :halign "start"
+        :space-evenly true
+        :spacing 20
+        (workspace_button :onclick "hyprctl dispatch workspace 1")
+        (workspace_button :onclick "hyprctl dispatch workspace 2")
+        (workspace_button :onclick "hyprctl dispatch workspace 3")
+        (workspace_button :onclick "hyprctl dispatch workspace 4")
+        (workspace_button :onclick "hyprctl dispatch workspace 5")
+    )
+)
+
+(defwidget window_title []
+    (box :class "window_title"
+        :orientation "h"
+        :halign "start"
+        {current_window_title != "null" ? "${current_window_title}" : ""}
+    )
+)
+
+;; Widgets section
+(defwidget leftwidgets []
+    (box :class "leftwidgets"
+        :orientation "h"
+        :halign "start"
+        :space-evenly false
+        :spacing 20
+        (workspace_buttons)
+        (window_title)
+    )
+)
+
+(defwidget centerwidgets []
+    (box :class "centerwidgets"
+        :orientation "h"
+        :halign "center"
+        time
+    )
+)
+
+(defwidget rightwidgets []
+    (box :class "rightwidgets" :orientation "h" :space-evenly false :halign "end"
         (metric :label "󰓃"
                 :value volume
                 :onchange "wpctl set-volume @DEFAULT_AUDIO_SINK@ -l 1.0 {}%")
+        (metric :label ""
+                :value {EWW_CPU.avg}
+                :onchange "")
         (metric :label ""
                 :value {EWW_RAM.used_mem_perc}
                 :onchange "")
         (metric :label ""
                 :value {round((1 - (EWW_DISK["/"].free / EWW_DISK["/"].total)) * 100, 0)}
-                :onchange "")
-    time)
-)
+                :onchange "")))
 
-(defwidget workspaces []
-    (box :class "workspaces" :orientation "h" :space-evenly true :halign "start" :spacing 10
-        (button :onclick "hyprctl dispatch workspace 1" 1)
-        (button :onclick "hyprctl dispatch workspace 2" 2)
-        (button :onclick "hyprctl dispatch workspace 3" 3)
-        (button :onclick "hyprctl dispatch workspace 4" 4)
-        (button :onclick "hyprctl dispatch workspace 5" 5)
+(defwidget bar []
+    (centerbox :orientation "h"
+        (leftwidgets)
+        (centerwidgets)
+        (rightwidgets)
     )
 )
 
-(defwidget music []
-  (box :class "music"
-       :orientation "h"
-       :space-evenly false
-       :halign "center"
-    {music != "" ? "🎵${music}" : ""}))
-
-
-(defwidget metric [label value onchange]
-  (box :orientation "h"
-       :class "metric"
-       :space-evenly false
-    (box :class "label" label)
-    (scale :min 0
-           :max 101
-           :active {onchange != ""}
-           :value value
-           :onchange onchange)))
-
-
-
-(deflisten music :initial ""
-  "playerctl --follow metadata --format '{{ artist }} - {{ title }}' || true")
-
-(defpoll volume :interval "1s" 
-    "scripts/getvol")
-
-(defpoll time :interval "1s"
-    "date '+%H:%M %b %d, %Y'")
-
+;; Window section
 (defwindow bar
     :monitor 0
     :windowtype "dock"
