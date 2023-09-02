@@ -12,15 +12,16 @@
 
 // Styles on classes (see eww.yuck for more information)
 .leftwidgets {
-    margin-left: 20px;
+    margin-left: 1.2em;
 }
 
 .workspace_button {
-    font-size: 25px;
+    font-size: 1.5em;
 }
 
-.workspace_button button:hover {
-    color: #D35D6E;
+.window_title {
+    margin-left: 20px;
+    font-size: 1.2em;
 }
 
 .rightwidgets {
@@ -28,23 +29,20 @@
 }
 
 .rightwidgets slider {
-    all: unset;
     color: #ffd5cd;
 }
 
 .metric {
-    font-size: 25px;
+    font-size: 1.2em;
 }
 
 .metric scale trough highlight {
-    all: unset;
     background-color: #D35D6E;
     color: #000000;
     border-radius: 10px;
 }
 
 .metric scale trough {
-    all: unset;
     background-color: #4e4e4e;
     border-radius: 50px;
     min-height: 5px;

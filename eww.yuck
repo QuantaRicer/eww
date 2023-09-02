@@ -2,20 +2,44 @@
 (defpoll volume :interval "1s"
     "scripts/getvol")
 (defpoll time :interval "1s"
-    "date '+%H:%M %b %d, %Y'")
+    "date '+%A, %b %d | %H:%M'")
 
 ;; Listener
-(deflisten current_window_title :initial ""
-    "scripts/hypr-title.sh")
+(deflisten workspaces_info :initial "[]"
+    "bash ~/.config/eww/scripts/get-workspaces-info.sh")
+(deflisten active_workspace :initial "1"
+    "bash ~/.config/eww/scripts/get-active-workspace.sh")
+(deflisten active_window :initial ""
+    "bash ~/.config/eww/scripts/get-active-window.sh")
 
 ;; Common widgets
-(defwidget workspace_button [onclick]
+(defwidget workspace_button [text onclick]
     (box :class "workspace_button"
-        :orientation "h"
-        :halign: "center"
         (button :onclick onclick
-            (label :markup "")
+            (label :text text)
         )
+    )
+)
+
+(defwidget workspaces []
+    (box :space-evenly true
+        :spacing 10
+        (label :text "${workspaces_info}${active_workspace}" :visible false)    ;; Reload the widget when data changed
+        (for info in workspaces_info
+            (workspace_button
+                :onclick "hyprctl dispatch workspace ${info.id}"
+                :text "${info.id == active_workspace ? "󰪥"
+                                                     : info.windows > 0 ? "󰻃"
+                                                                        : ""}"
+            )
+        )
+    )
+)
+
+(defwidget window_title []
+    (box :class "window_title"
+        :halign "start"
+        (label :text "${active_window}")
     )
 )
 
@@ -33,28 +57,6 @@
     )
 )
 
-(defwidget workspace_buttons []
-    (box :class "workspace_buttons"
-        :orientation "h"
-        :halign "start"
-        :space-evenly true
-        :spacing 20
-        (workspace_button :onclick "hyprctl dispatch workspace 1")
-        (workspace_button :onclick "hyprctl dispatch workspace 2")
-        (workspace_button :onclick "hyprctl dispatch workspace 3")
-        (workspace_button :onclick "hyprctl dispatch workspace 4")
-        (workspace_button :onclick "hyprctl dispatch workspace 5")
-    )
-)
-
-(defwidget window_title []
-    (box :class "window_title"
-        :orientation "h"
-        :halign "start"
-        {current_window_title != "null" ? "${current_window_title}" : ""}
-    )
-)
-
 ;; Widgets section
 (defwidget leftwidgets []
     (box :class "leftwidgets"
@@ -62,7 +64,7 @@
         :halign "start"
         :space-evenly false
         :spacing 20
-        (workspace_buttons)
+        (workspaces)
         (window_title)
     )
 )
@@ -78,17 +80,17 @@
 (defwidget rightwidgets []
     (box :class "rightwidgets" :orientation "h" :space-evenly false :halign "end"
         (metric :label "󰓃"
-                :value volume
-                :onchange "wpctl set-volume @DEFAULT_AUDIO_SINK@ -l 1.0 {}%")
+            :value volume
+            :onchange "wpctl set-volume @DEFAULT_AUDIO_SINK@ -l 1.0 {}%")
         (metric :label ""
-                :value {EWW_CPU.avg}
-                :onchange "")
+            :value {EWW_CPU.avg}
+            :onchange "")
         (metric :label ""
-                :value {EWW_RAM.used_mem_perc}
-                :onchange "")
+            :value {EWW_RAM.used_mem_perc}
+            :onchange "")
         (metric :label ""
-                :value {round((1 - (EWW_DISK["/"].free / EWW_DISK["/"].total)) * 100, 0)}
-                :onchange "")))
+            :value {round((1 - (EWW_DISK["/"].free / EWW_DISK["/"].total)) * 100, 0)}
+            :onchange "")))
 
 (defwidget bar []
     (centerbox :orientation "h"
@@ -105,7 +107,7 @@
     :geometry (geometry :x "0%"
                         :y "8px"
                         :width "99%"
-                        :height "3%"
+                        :height "4%"
                         :anchor "top center")
     :exclusive "true"
     (bar)
