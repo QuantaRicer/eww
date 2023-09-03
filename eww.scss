@@ -2,30 +2,42 @@
     all: unset; //Unsets everything so you can style everything from scratch
 }
 
-//Global Styles
-.bar {
-    background-color: #3a3a3a;
-    color: #b0b4bc;
-    padding: 10px;
-    border-radius: 2em;
+.bar,
+.leftwidgets,
+.centerwidgets,
+.rightwidgets,
+.workspaces {
+    border-radius: 40px;
 }
 
-// Styles on classes (see eww.yuck for more information)
-.leftwidgets {
-    margin-left: 1.2em;
+.bar {
+    background-color: rgba(58, 58, 58, 0.85);
 }
 
 .workspace_button {
-    font-size: 1.5em;
+    font-size: 30px;
+}
+
+.workspaces {
+    padding: 0px 20px;
+    color: #0b5452;
+    background: linear-gradient(90deg, rgba(0,228,208,1), rgba(0,210,218,1));
 }
 
 .window_title {
-    margin-left: 20px;
-    font-size: 1.2em;
+    font-size: 18px;
+    color: #fafafa;
+}
+
+.centerwidgets {
+    font-size: 20px;
+    color: #0b5452;
+    padding: 0px 20px;
+    background: linear-gradient(90deg, rgba(0, 210, 218, 1), rgba(0,192,229,1));
 }
 
 .rightwidgets {
-    margin-right: 15px;
+    padding: 0px 20px;
 }
 
 .rightwidgets slider {
@@ -33,7 +45,8 @@
 }
 
 .metric {
-    font-size: 1.2em;
+    font-size: 20px;
+    padding-left: 20px;
 }
 
 .metric scale trough highlight {

@@ -22,7 +22,8 @@
 )
 
 (defwidget workspaces []
-    (box :space-evenly true
+    (box :class "workspaces"
+        :space-evenly true
         :spacing 10
         (label :text "${workspaces_info}${active_workspace}" :visible false)    ;; Reload the widget when data changed
         (for info in workspaces_info
@@ -107,7 +108,7 @@
     :geometry (geometry :x "0%"
                         :y "8px"
                         :width "99%"
-                        :height "4%"
+                        :height "3%"
                         :anchor "top center")
     :exclusive "true"
     (bar)
