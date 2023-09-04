@@ -1,48 +1,13 @@
+
+;; Modules
+(include "./modules/workspaces.yuck")
+(include "./modules/system.yuck")
+
 ;; Variables section
 (defpoll volume :interval "1s"
     "scripts/getvol")
 (defpoll time :interval "1s"
     "date '+%A, %b %d | %H:%M'")
-
-;; Listener
-(deflisten workspaces_info :initial "[]"
-    "bash ~/.config/eww/scripts/get-workspaces-info.sh")
-(deflisten active_workspace :initial "1"
-    "bash ~/.config/eww/scripts/get-active-workspace.sh")
-(deflisten active_window :initial ""
-    "bash ~/.config/eww/scripts/get-active-window.sh")
-
-;; Common widgets
-(defwidget workspace_button [text onclick]
-    (box :class "workspace_button"
-        (button :onclick onclick
-            (label :text text)
-        )
-    )
-)
-
-(defwidget workspaces []
-    (box :class "workspaces"
-        :space-evenly true
-        :spacing 10
-        (label :text "${workspaces_info}${active_workspace}" :visible false)    ;; Reload the widget when data changed
-        (for info in workspaces_info
-            (workspace_button
-                :onclick "hyprctl dispatch workspace ${info.id}"
-                :text "${info.id == active_workspace ? "󰪥"
-                                                     : info.windows > 0 ? "󰻃"
-                                                                        : ""}"
-            )
-        )
-    )
-)
-
-(defwidget window_title []
-    (box :class "window_title"
-        :halign "start"
-        (label :text "${active_window}")
-    )
-)
 
 (defwidget metric [label value onchange]
     (box :orientation "h"
@@ -65,8 +30,7 @@
         :halign "start"
         :space-evenly false
         :spacing 20
-        (workspaces)
-        (window_title)
+        (window-title)
     )
 )
 
@@ -74,7 +38,7 @@
     (box :class "centerwidgets"
         :orientation "h"
         :halign "center"
-        time
+        (workspaces-widget)
     )
 )
 
@@ -82,16 +46,12 @@
     (box :class "rightwidgets" :orientation "h" :space-evenly false :halign "end"
         (metric :label "󰓃"
             :value volume
-            :onchange "wpctl set-volume @DEFAULT_AUDIO_SINK@ -l 1.0 {}%")
-        (metric :label ""
-            :value {EWW_CPU.avg}
-            :onchange "")
-        (metric :label ""
-            :value {EWW_RAM.used_mem_perc}
-            :onchange "")
-        (metric :label ""
-            :value {round((1 - (EWW_DISK["/"].free / EWW_DISK["/"].total)) * 100, 0)}
-            :onchange "")))
+            :onchange "wpctl set-volume @DEFAULT_AUDIO_SINK@ -l 1.0 {}%"
+        )
+        (system-monitor-widget)
+        time
+    )
+)
 
 (defwidget bar []
     (centerbox :orientation "h"

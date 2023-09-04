@@ -6,22 +6,28 @@
 .leftwidgets,
 .centerwidgets,
 .rightwidgets,
-.workspaces {
+.workspaces-widget,
+.system-monitor-widget {
     border-radius: 40px;
+}
+
+.workspaces-widget,
+.system-monitor-widget {
+    padding: 0px 20px;
 }
 
 .bar {
     background-color: rgba(58, 58, 58, 0.85);
 }
 
-.workspace_button {
+.workspace-button {
     font-size: 30px;
 }
 
-.workspaces {
-    padding: 0px 20px;
+.workspaces-widget {
     color: #0b5452;
-    background: linear-gradient(90deg, rgba(0,228,208,1), rgba(0,210,218,1));
+    // background: linear-gradient(90deg, rgba(0,228,208,1), rgba(0,210,218,1));
+    background: linear-gradient(90deg, #00cae0, #00bde8);
 }
 
 .window_title {
@@ -32,12 +38,9 @@
 .centerwidgets {
     font-size: 20px;
     color: #0b5452;
-    padding: 0px 20px;
-    background: linear-gradient(90deg, rgba(0, 210, 218, 1), rgba(0,192,229,1));
 }
 
 .rightwidgets {
-    padding: 0px 20px;
 }
 
 .rightwidgets slider {
@@ -62,4 +65,13 @@
     min-width: 50px;
     margin-left: 10px;
     margin-right: 20px;
+}
+
+.system-monitor-widget {
+    background: linear-gradient(90deg, #00b0ef, #00aaf3);
+}
+
+.system-monitor-circular {
+    background-color: #5a5a5a;
+    color: #fe9f21;
 }
