@@ -1,13 +1,13 @@
 
 ;; Modules
-(include "./modules/workspaces.yuck")
-(include "./modules/system.yuck")
+(include "modules/workspaces.yuck")
+(include "modules/system.yuck")
+(include "modules/datetime.yuck")
+(include "modules/power.yuck")
 
 ;; Variables section
 (defpoll volume :interval "1s"
     "scripts/getvol")
-(defpoll time :interval "1s"
-    "date '+%A, %b %d | %H:%M'")
 
 (defwidget metric [label value onchange]
     (box :orientation "h"
@@ -24,45 +24,51 @@
 )
 
 ;; Widgets section
-(defwidget leftwidgets []
-    (box :class "leftwidgets"
+(defwidget left-widgets []
+    (box :class "left-widgets"
         :orientation "h"
         :halign "start"
         :space-evenly false
         :spacing 20
+        (workspaces-widget)
         (window-title)
     )
 )
 
-(defwidget centerwidgets []
-    (box :class "centerwidgets"
+(defwidget center-widgets []
+    (box :class "center-widgets"
         :orientation "h"
         :halign "center"
-        (workspaces-widget)
+        (date-time)
     )
 )
 
-(defwidget rightwidgets []
-    (box :class "rightwidgets" :orientation "h" :space-evenly false :halign "end"
+(defwidget right-widgets []
+    (box :class "right-widgets"
+        :orientation "h"
+        :space-evenly false
+        :halign "end"
         (metric :label "󰓃"
             :value volume
             :onchange "wpctl set-volume @DEFAULT_AUDIO_SINK@ -l 1.0 {}%"
         )
         (system-monitor-widget)
-        time
+        (power-button)
     )
 )
 
 (defwidget bar []
-    (centerbox :orientation "h"
-        (leftwidgets)
-        (centerwidgets)
-        (rightwidgets)
+    (centerbox 
+        :orientation "h"
+        (left-widgets)
+        (center-widgets)
+        (right-widgets)
     )
 )
 
 ;; Window section
 (defwindow bar
+    :namespace "statusbar"
     :monitor 0
     :windowtype "dock"
     :geometry (geometry :x "0%"

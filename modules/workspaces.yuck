@@ -3,17 +3,8 @@
     "bash ~/.config/eww/scripts/get-workspaces.sh")
 (deflisten active-workspace :initial "1"
     "bash ~/.config/eww/scripts/get-active-workspace.sh")
-(deflisten active-window :initial ""
+(deflisten active-window :initial "..."
     "bash ~/.config/eww/scripts/get-active-window.sh")
-
-;; Common widgets
-(defwidget workspace-button [text onclick]
-    (box :class "workspace-button"
-        (button :onclick onclick
-            (label :text text)
-        )
-    )
-)
 
 (defwidget workspaces-widget []
     (box :class "workspaces-widget"
@@ -21,11 +12,14 @@
         :spacing 10
         (label :text "${workspaces}${active-workspace}" :visible false)    ;; Reload the widget when data changed
         (for workspace in workspaces
-            (workspace-button
-                :onclick "hyprctl dispatch workspace ${workspace.id}"
-                :text "${workspace.id == active-workspace ? "󰪥"
-                                                          : workspace.windows > 0 ? "󰻃"
-                                                                                  : ""}"
+            (box :class "workspace-button-${workspace.id == active-workspace ? "active" : "deactive"}"
+                (button :onclick "hyprctl dispatch workspace ${workspace.id}"
+                    (label 
+                        :text "${workspace.id == active-workspace ? "󰐾"
+                                                                  : workspace.windows > 0 ? "󰻃"
+                                                                                          : ""}"
+                    )
+                )
             )
         )
     )

@@ -1,0 +1,7 @@
+(defwidget power-button []
+    (box :class "power-button"
+        (button :onclick "kitty &"
+            (label :text "")
+        )
+    )
+)

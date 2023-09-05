@@ -3,31 +3,36 @@
 }
 
 .bar,
-.leftwidgets,
-.centerwidgets,
-.rightwidgets,
 .workspaces-widget,
-.system-monitor-widget {
-    border-radius: 40px;
+.date-time,
+.system-monitor-widget,
+.power-button {
+    border-radius: 8px;
+    background-color: #2a2a2a;
 }
 
 .workspaces-widget,
+.date-time,
 .system-monitor-widget {
-    padding: 0px 20px;
+    padding: 0px 16px;
+    color: #eaeaea;
 }
 
 .bar {
-    background-color: rgba(58, 58, 58, 0.85);
+    background-color: rgba(176, 176, 176, 0.3);
 }
 
-.workspace-button {
+.workspace-button-active,
+.workspace-button-deactive {
     font-size: 30px;
 }
 
+.workspace-button-deactive {
+    color: #7c7c7c;
+}
+
 .workspaces-widget {
-    color: #0b5452;
-    // background: linear-gradient(90deg, rgba(0,228,208,1), rgba(0,210,218,1));
-    background: linear-gradient(90deg, #00cae0, #00bde8);
+    background-color: #2a2a2a;
 }
 
 .window_title {
@@ -35,15 +40,29 @@
     color: #fafafa;
 }
 
-.centerwidgets {
+.system-monitor-widget {
+    margin-right: 5px;
+}
+
+.power-button {
+    padding: 0px 10px;
+    font-size: 30px;
+}
+
+.left-widgets {
+    padding: 4px;
+}
+
+.center-widgets {
     font-size: 20px;
-    color: #0b5452;
+    padding: 4px;
 }
 
-.rightwidgets {
+.right-widgets {
+    padding: 4px;
 }
 
-.rightwidgets slider {
+.right-widgets slider {
     color: #ffd5cd;
 }
 
@@ -67,11 +86,7 @@
     margin-right: 20px;
 }
 
-.system-monitor-widget {
-    background: linear-gradient(90deg, #00b0ef, #00aaf3);
-}
-
 .system-monitor-circular {
     background-color: #5a5a5a;
-    color: #fe9f21;
+    color: #d35d6e;
 }
