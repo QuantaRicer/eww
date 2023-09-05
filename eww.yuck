@@ -74,7 +74,7 @@
     :geometry (geometry :x "0%"
                         :y "8px"
                         :width "99%"
-                        :height "3%"
+                        :height "40px"
                         :anchor "top center")
     :exclusive "true"
     (bar)
