@@ -1,8 +1,8 @@
 * {
     all: unset; //Unsets everything so you can style everything from scratch
+    font-family: "CodeNewRoman Nerd Font Mono";
 }
 
-.bar,
 .workspaces-widget,
 .date-time,
 .system-monitor-widget,
@@ -24,7 +24,7 @@
 
 .workspace-button-active,
 .workspace-button-deactive {
-    padding: 0px 5px;
+    padding: 0 5px;
     font-size: 30px;
 }
 
@@ -41,26 +41,31 @@
     color: #fafafa;
 }
 
+.date-time {
+    font-size: 20px;
+}
+
 .system-monitor-widget {
     margin-right: 5px;
 }
 
 .power-button {
-    padding: 0px 10px;
+    padding: 0px 12px;
     font-size: 30px;
 }
 
-.left-widgets {
-    padding: 4px;
+.left-widgets,
+.center-widgets,
+.right-widgets {
+    padding: 4px 0;
 }
 
-.center-widgets {
-    font-size: 20px;
-    padding: 4px;
+.left-widgets {
+    margin-left: 10px;
 }
 
 .right-widgets {
-    padding: 4px;
+    margin-right: 10px;
 }
 
 .right-widgets slider {

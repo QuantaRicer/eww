@@ -3,7 +3,7 @@
 
 (defwidget date-time []
     (box :class "date-time"
-        (button :onclick "swaync-client -t"
+        (button :onclick ""
             (label :text "${time}")
         )
     )
