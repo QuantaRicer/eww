@@ -1,20 +1,20 @@
 ;; Listener
-(deflisten workspaces :initial "[]"
-    "bash ~/.config/eww/scripts/get-workspaces.sh")
-(deflisten active-workspace :initial "1"
-    "bash ~/.config/eww/scripts/get-active-workspace.sh")
-(deflisten active-window :initial "..."
-    "bash ~/.config/eww/scripts/get-active-window.sh")
+(defvar workspace-init "eval ~/.cargo/bin/hyprvisor --workspace-init")
+(deflisten workspaces :initial "${workspace-init}"
+    "eval ~/.cargo/bin/hyprvisor --workspace")
+
+(defvar window-init "eval ~/.cargo/bin/hyprvisor --window-init")
+(deflisten active-window :initial "${window-init}"
+    "eval ~/.cargo/bin/hyprvisor --window")
 
 (defwidget workspaces-widget []
     (box :class "workspaces-widget"
-        (label :text "${workspaces}${active-workspace}" :visible false)    ;; Reload the widget when data changed
+        ;; (label :text "${workspaces}" :visible false)    ;; Reload the widget when data changed
         (for workspace in workspaces
-            (box :class "workspace-button-${workspace.id == active-workspace ? "active" : "deactive"}"
+            (box :class "workspace-button-${workspace.active ? "active" : "deactive"}"
                 (button :onclick "hyprctl dispatch workspace ${workspace.id}"
                     (label 
-                        :text "${workspace.id == active-workspace ? "󰐾"
-                                                                  : workspace.windows > 0 ? "󰻃" : ""}"
+                        :text "${workspace.active ? "󰐾" : workspace.occupied ? "󰻃" : ""}"
                     )
                 )
             )
