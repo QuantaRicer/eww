@@ -2,9 +2,6 @@
 (deflisten workspaces :initial "[]"
     "bash -c '~/.cargo/bin/hyprvisor workspace'")
 
-(deflisten active-window :initial ""
-    "bash -c '~/.cargo/bin/hyprvisor window'")
-
 (defwidget workspaces-widget []
     (box :class "workspaces-widget"
         ;; (label :text "${workspaces}" :visible false)    ;; Reload the widget when data changed
@@ -17,12 +14,5 @@
                 )
             )
         )
-    )
-)
-
-(defwidget window-title []
-    (box :class "window-title"
-        :halign "start"
-        (label :text "${active-window}")
     )
 )

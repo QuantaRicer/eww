@@ -30,7 +30,6 @@
         :space-evenly false
         :spacing 20
         (workspaces-widget)
-        (window-title)
     )
 )
 
@@ -69,7 +68,7 @@
     :geometry (geometry :x "0px"
                         :y "0px"
                         :width "100%"
-                        :height "50px"
+                        :height "40px"
                         :anchor "top center")
     :exclusive "true"
     (bar)
