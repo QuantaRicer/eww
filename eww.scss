@@ -3,17 +3,30 @@
     font-family: "CodeNewRoman Nerd Font Mono";
 }
 
+/** tooltip!! **/
+tooltip.background {
+    background-color: #1f1f1f;
+    border-radius: 8px;
+    font-size: 18;
+    color: #bfc9db;
+}
+
+tooltip label {
+    margin: 6px;
+}
+
 .workspaces-widget,
 .date-time,
 .system-monitor-widget,
-.power-button {
+.power-menu {
     border-radius: 8px;
     background-color: #2a2a2a;
 }
 
 .workspaces-widget,
 .date-time,
-.system-monitor-widget {
+.system-monitor-widget,
+.power-button {
     padding: 0px 10px;
     color: #eaeaea;
 }
@@ -50,8 +63,11 @@
     margin-right: 5px;
 }
 
+.power-menu {
+    padding: 0px 5px;
+}
+
 .power-button {
-    padding: 0px 12px;
     font-size: 30px;
 }
 
