@@ -1,15 +1,16 @@
 ;; Listener
 (deflisten workspaces :initial "[]"
-    "bash -c '~/.cargo/bin/hyprvisor workspace'")
+    "bash -c '~/.cargo/bin/hyprvisor workspaces'")
 
 (defwidget workspaces-widget []
     (box :class "workspaces-widget"
         ;; (label :text "${workspaces}" :visible false)    ;; Reload the widget when data changed
-        (for workspace in "${workspaces}"
+        (for workspace in workspaces
             (box :class "workspace-button-${workspace.active ? "active" : "deactive"}"
                 (button :onclick "hyprctl dispatch workspace ${workspace.id}"
                     (label 
-                        :text "${workspace.active ? "󰐾" : workspace.occupied ? "󰻃" : ""}"
+                        :text "${workspace.occupied ? workspace.active ? "󰐾" : "󰻃"
+                                                    : workspace.active ? "" : "" }"
                     )
                 )
             )
