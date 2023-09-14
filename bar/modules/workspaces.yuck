@@ -9,7 +9,7 @@
             (box :class "workspace-button-${workspace.active ? "active" : "deactive"}"
                 (button :onclick "hyprctl dispatch workspace ${workspace.id}"
                     (label 
-                        :text "${workspace.occupied ? workspace.active ? "󰐾" : "󰻃"
+                        :text "${workspace.occupied ? workspace.active ? "" : "󰻃"
                                                     : workspace.active ? "" : "" }"
                     )
                 )
