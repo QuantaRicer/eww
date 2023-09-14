@@ -5,12 +5,14 @@
 (defwidget workspaces-widget []
     (box :class "workspaces-widget"
         ;; (label :text "${workspaces}" :visible false)    ;; Reload the widget when data changed
-        (for workspace in workspaces
-            (box :class "workspace-button-${workspace.active ? "active" : "deactive"}"
-                (button :onclick "hyprctl dispatch workspace ${workspace.id}"
+        (for ws in workspaces
+            (box :class "workspace-button-${ws.active ? "active" : "deactive"}"
+                (button 
+                    :onclick "hyprctl dispatch workspace ${ws.id}"
+                    :tooltip "Workspace ${ws.id}"
                     (label 
-                        :text "${workspace.occupied ? workspace.active ? "" : "󰻃"
-                                                    : workspace.active ? "" : "" }"
+                        :text "${ws.occupied ? ws.active ? "" : "󰻃"
+                                             : ws.active ? "" : "" }"
                     )
                 )
             )

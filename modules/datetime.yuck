@@ -1,10 +1,32 @@
+(defpoll date :interval "30s"
+    "date '+%A, %b %d'")
 (defpoll time :interval "2s"
-    "date '+%A, %b %d | %H:%M'")
+    "date '+%H:%M'")
+(defvar show_date_time true)
 
 (defwidget date-time []
-    (box :class "date-time"
-        (button :onclick ""
-            (label :text "${time}")
+    (eventbox
+        :onclick "${EWW_CMD} update show_date_time=${!show_date_time}"
+        (box :class "date-time"
+            :orientation "h"
+            :space-evenly false
+            (revealer 
+                :transition "slideleft"
+                :duration "300ms"
+                :reveal show_date_time
+                (box :orientation "h"
+                    :space-evenly false
+                    (label :class "datetime-label"
+                        :text "${date}"
+                    )
+                    (label :class "datetime-label"
+                        :text "|"
+                    )
+                )
+            )
+            (label :class "datetime-label"
+                :text "${time}"
+            )
         )
     )
 )

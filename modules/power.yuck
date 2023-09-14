@@ -14,20 +14,24 @@
                     :space-evenly false
                     (button :class "power-button"
                         :onclick "hyprctl dispatch exit"
+                        :tooltip "Exit Hyprland"
                         "󰗼"
                     )
                     (button :class "power-button"
                         :onclick "systemctl reboot"
+                        :tooltip "Restart"
                         ""
                     )
                     (button :class "power-button"
                         :onclick "systemctl poweroff"
+                        :tooltip "Power Off"
                         "󰐥"
                     )
                 )
             )
             (button :class "power-button"
                 :onclick ""
+                :tooltip "Lock"
                 ""
             )
         )

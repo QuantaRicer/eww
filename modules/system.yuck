@@ -3,9 +3,9 @@
         :tooltip tooltip
         (circular-progress :class "system-monitor-circular"
             :value value
-            :width 25
-            :height 25
-            :thickness 5
+            :width 27
+            :height 27
+            :thickness 6
             :start-at 75
         )
     )
