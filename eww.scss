@@ -17,6 +17,7 @@ tooltip label {
 
 .workspaces-widget,
 .date-time,
+.quick-control,
 .system-monitor-widget,
 .power-menu {
     border-radius: 8px;
@@ -59,8 +60,23 @@ tooltip label {
     font-size: 18px;
 }
 
+// Right section
+.quick-control,
 .system-monitor-widget {
     margin-right: 5px;
+    padding: 0px 10px;
+    background-color: #2a2a2a;
+    border-radius: 8px;
+}
+
+.quick-control {
+    &-button {
+        padding: 0px 5px;
+        font-size: 20px;
+    }
+}
+
+.system-monitor-widget {
 }
 
 .power-menu {

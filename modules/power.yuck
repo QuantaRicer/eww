@@ -7,15 +7,15 @@
         (box :class "power-menu"
             :orientation "h"
             :space-evenly false
-            (revealer :transition "slideleft"
+            (revealer :transition "slideright"
                 :reveal power_reveal
                 :duration "250ms"
                 (box :orientation "h"
                     :space-evenly false
                     (button :class "power-button"
-                        :onclick "hyprctl dispatch exit"
-                        :tooltip "Exit Hyprland"
-                        "󰗼"
+                        :onclick "systemctl poweroff"
+                        :tooltip "Power Off"
+                        "󰐥"
                     )
                     (button :class "power-button"
                         :onclick "systemctl reboot"
@@ -23,16 +23,21 @@
                         ""
                     )
                     (button :class "power-button"
-                        :onclick "systemctl poweroff"
-                        :tooltip "Power Off"
-                        "󰐥"
+                        :onclick "hyprctl dispatch exit"
+                        :tooltip "Exit Hyprland"
+                        "󰗼"
+                    )
+                    (button :class "power-button"
+                        :onclick ""
+                        :tooltip "Lock"
+                        ""
                     )
                 )
             )
             (button :class "power-button"
-                :onclick ""
-                :tooltip "Lock"
-                ""
+                :onclick "hyprctl dispatch dpms off"
+                :tooltip "Sleep"
+                "󰤄"
             )
         )
     )
