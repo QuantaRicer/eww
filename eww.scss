@@ -15,8 +15,14 @@ tooltip label {
     margin: 6px;
 }
 
+.bar {
+    background-color: rgba(176, 176, 176, 0.3);
+}
+
+.dashboard,
 .workspaces-widget,
 .date-time,
+.notification,
 .quick-control,
 .system-monitor-widget,
 .power-menu {
@@ -24,6 +30,7 @@ tooltip label {
     background-color: #2a2a2a;
 }
 
+.dashboard,
 .workspaces-widget,
 .date-time,
 .system-monitor-widget,
@@ -32,8 +39,9 @@ tooltip label {
     color: #eaeaea;
 }
 
-.bar {
-    background-color: rgba(176, 176, 176, 0.3);
+// Left section
+.dashboard {
+    font-size: 30px;
 }
 
 .workspace-button-active,
@@ -55,15 +63,20 @@ tooltip label {
     color: #fafafa;
 }
 
+// Central section
 .datetime-label {
     padding: 0px 5px;
     font-size: 18px;
 }
 
+.notification {
+    padding: 0px 11px;
+    font-size: 30px;
+}
+
 // Right section
 .quick-control,
 .system-monitor-widget {
-    margin-right: 5px;
     padding: 0px 10px;
     background-color: #2a2a2a;
     border-radius: 8px;

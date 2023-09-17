@@ -1,0 +1,8 @@
+(defwidget dashboard []
+    (box :class "dashboard"
+        (button
+            :onlick ""
+            "󰣇"
+        )
+    )
+)

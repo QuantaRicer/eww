@@ -1,9 +1,11 @@
 ;; Modules
+(include "modules/dashboard.yuck")
 (include "modules/workspaces.yuck")
 (include "modules/datetime.yuck")
 (include "modules/quickcontrol.yuck")
 (include "modules/system.yuck")
 (include "modules/power.yuck")
+(include "modules/notification.yuck")
 
 ;; Widgets section
 (defwidget left-widgets []
@@ -11,16 +13,20 @@
         :orientation "h"
         :halign "start"
         :space-evenly false
-        :spacing 20
+        :spacing 5
+        (dashboard)
         (workspaces-widget)
     )
 )
 
 (defwidget center-widgets []
     (box :class "center-widgets"
-        :orientation "h"
         :halign "center"
+        :orientation "h"
+        :space-evenly false
+        :spacing 5
         (date-time)
+        (notification)
     )
 )
 
@@ -28,6 +34,7 @@
     (box :class "right-widgets"
         :orientation "h"
         :space-evenly false
+        :spacing 5
         :halign "end"
         (quick-control)
         (system-monitor-widget)
