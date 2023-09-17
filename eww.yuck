@@ -38,7 +38,7 @@
         :halign "end"
         (quick-control)
         (system-monitor-widget)
-        (power)
+        (power-window)
     )
 )
 

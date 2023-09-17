@@ -42,3 +42,13 @@
         )
     )
 )
+
+(defwidget power-window []
+    (box :class "power-menu"
+        (button :class "power-button"
+            :onclick "eww -c ~/.config/eww/widgets/power-menu open power-overlay"
+            :tooltip "Power menu"
+            "󰐥"
+        )
+    )
+)

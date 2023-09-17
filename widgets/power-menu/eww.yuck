@@ -1,0 +1,119 @@
+;; Contants
+(defvar power_button_w 200)
+(defvar power_button_h 200)
+(defvar power_button_spacing 20)
+
+(defvar confirm_button_w 530)
+(defvar confirm_button_h 100)
+(defvar confirm_button_spacing 20)
+
+(defvar action_command " ")
+(defvar confirm_action false)
+
+(defwidget power-button [name action icon]
+    (eventbox
+        :onhover ""
+        :onhoverlost ""
+        (box :class "power-button-${name}"
+            (button
+                :width power_button_w
+                :height power_button_h
+                :onclick "${EWW_CMD} update action_command='${action}' && ${EWW_CMD} update confirm_action=true"
+                "${icon}"
+            )
+        )
+    )
+)
+
+(defwidget power-button-list []
+    (box
+        :orientation "h"
+        :space-evenly false
+        :spacing power_button_spacing
+        (power-button
+            :name "dpms"
+            :action "hyprctl dispatch dpms off"
+            :icon "󰤄"
+        )
+        (power-button
+            :name "lock"
+            :action ""
+            :icon ""
+        )
+        (power-button
+            :name "exit"
+            :action "hyprctl dispatch exit"
+            :icon "󰗼"
+        )
+        (power-button
+            :name "reboot"
+            :action "systemctl reboot"
+            :icon ""
+        )
+        (power-button
+            :name "poweroff"
+            :action "systemctl poweroff"
+            :icon "󰐥"
+        )
+    )
+)
+
+(defwidget confirm-button-list []
+    (box
+        :orientation "h"
+        :space-evenly false
+        :spacing confirm_button_spacing
+        (eventbox
+            (box :class "confirm-button"
+                (button
+                    :width confirm_button_w
+                    :height confirm_button_h
+                    :onclick "${EWW_CMD} close power-overlay && sleep 0.1 && bash -c '${action_command}' && ${EWW_CMD} update action_command=' ' && ${EWW_CMD} update confirm_action=false"
+                    "Confirm"
+                )
+            )
+        )
+        (eventbox
+            (box :class "confirm-button"
+                (button
+                    :width confirm_button_w
+                    :height confirm_button_h
+                    :onclick "${EWW_CMD} update action_command=' ' && ${EWW_CMD} update confirm_action=false"
+                    "Nah"
+                )
+            )
+        )
+    )
+)
+
+(defwidget power-menu []
+    (eventbox 
+        :onclick "${EWW_CMD} close power-overlay && ${EWW_CMD} update action_command=' ' && ${EWW_CMD} update confirm_action=false"
+        :hexpand true
+        :vexpand true
+        (box :class "power-menu"
+            :orientation "v"
+            :space-evenly false
+            :halign "center"
+            :valign "center"
+            :spacing 10
+            (power-button-list)
+            (revealer :transition "slidedown"
+                :reveal confirm_action
+                :duration "300ms"
+                (confirm-button-list)
+            )
+        )
+    )
+)
+
+(defwindow power-overlay
+    :monitor 0
+    :stacking "overlay"
+    :focusable true
+    :geometry (geometry
+            :width "100%"
+            :height "100%"
+        )
+    (power-menu)
+)

@@ -1,0 +1,31 @@
+* {
+    all: unset;
+}
+
+.power-overlay {
+    background: rgba(40, 40, 40, 0.8);
+}
+
+.confirm-button{
+    border-radius: 8px;
+    background-color: #1a1a1a;
+    font-size: 30px;
+    color: #fafafa;
+}
+
+.power-button {
+    &-dpms,
+    &-lock,
+    &-exit,
+    &-reboot,
+    &-poweroff {
+        border-radius: 8px;
+        background-color: #1a1a1a;
+        font-size: 100px;
+        color: #fafafa;
+    }
+
+    &-poweroff {
+        color: #d35d6e;
+    }
+}
