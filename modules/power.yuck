@@ -46,7 +46,7 @@
 (defwidget power-window []
     (box :class "power-menu"
         (button :class "power-button"
-            :onclick "eww -c ~/.config/eww/widgets/power-menu open power-overlay"
+            :onclick "sleep 0.1 && eww -c ~/.config/eww/widgets/power-overlay open power-overlay"
             :tooltip "Power menu"
             "󰐥"
         )

@@ -100,7 +100,7 @@
             (power-button-list)
             (revealer :transition "slidedown"
                 :reveal confirm_action
-                :duration "300ms"
+                :duration "250ms"
                 (confirm-button-list)
             )
         )
