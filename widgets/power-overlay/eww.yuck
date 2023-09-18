@@ -123,8 +123,8 @@
 
 (defwindow power-overlay
     :monitor 0
-    :namespace "overlay"
-    :stacking "fg"
+    :namespace "power_overlay"
+    :stacking "overlay"
     :focusable true
     :geometry (geometry
             :width "100%"

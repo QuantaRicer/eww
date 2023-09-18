@@ -53,7 +53,7 @@
 
 ;; Window section
 (defwindow bar
-    :namespace "ewwbar"
+    :namespace "eww_statusbar"
     :monitor 0
     :windowtype "dock"
     :geometry (geometry :x "0px"
