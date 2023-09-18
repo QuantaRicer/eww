@@ -7,7 +7,8 @@
 (defvar confirm_button_h 100)
 (defvar confirm_button_spacing 20)
 
-(defvar action_command " ")
+(defvar action_name "none")
+(defvar action_command "echo")
 (defvar confirm_action false)
 
 (defwidget power-button [name action icon]
@@ -15,10 +16,13 @@
         :onhover ""
         :onhoverlost ""
         (box :class "power-button-${name}"
+            :style "${name == action_name ? "background-color: #125589;" : ""}"
             (button
                 :width power_button_w
                 :height power_button_h
-                :onclick "${EWW_CMD} update action_command='${action}' && ${EWW_CMD} update confirm_action=true"
+                :onclick "${EWW_CMD} update action_command='${action}' \
+                    && ${EWW_CMD} update action_name=${name} \
+                    && ${EWW_CMD} update confirm_action=true"
                 "${icon}"
             )
         )
@@ -68,8 +72,13 @@
                 (button
                     :width confirm_button_w
                     :height confirm_button_h
-                    :onclick "${EWW_CMD} close power-overlay && sleep 0.1 && bash -c '${action_command}' && ${EWW_CMD} update action_command=' ' && ${EWW_CMD} update confirm_action=false"
-                    "Confirm"
+                    :onclick "${EWW_CMD} close power-overlay \
+                        && ${EWW_CMD} update action_name=none \
+                        && ${EWW_CMD} update confirm_action=false \
+                        && sleep 0.1 \
+                        && bash -c '${action_command}' \
+                        && ${EWW_CMD} update action_command=echo"
+                    "Sure"
                 )
             )
         )
@@ -78,7 +87,9 @@
                 (button
                     :width confirm_button_w
                     :height confirm_button_h
-                    :onclick "${EWW_CMD} update action_command=' ' && ${EWW_CMD} update confirm_action=false"
+                    :onclick "${EWW_CMD} update action_command='echo' \
+                        && ${EWW_CMD} update action_name=none \
+                        && ${EWW_CMD} update confirm_action=false"
                     "Nah"
                 )
             )
@@ -88,7 +99,10 @@
 
 (defwidget power-menu []
     (eventbox 
-        :onclick "${EWW_CMD} close power-overlay && ${EWW_CMD} update action_command=' ' && ${EWW_CMD} update confirm_action=false"
+        :onclick "${EWW_CMD} close power-overlay \
+            && ${EWW_CMD} update action_command=' ' \
+            && ${EWW_CMD} update action_name=none \
+            && ${EWW_CMD} update confirm_action=false"
         :hexpand true
         :vexpand true
         (box :class "power-menu"
@@ -109,7 +123,8 @@
 
 (defwindow power-overlay
     :monitor 0
-    :stacking "overlay"
+    :namespace "overlay"
+    :stacking "fg"
     :focusable true
     :geometry (geometry
             :width "100%"
