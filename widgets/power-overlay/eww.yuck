@@ -131,7 +131,7 @@
             :spacing 10
             (power-button-list)
             (revealer :transition "slidedown"
-                :reveal "${selected_button != 0}"
+                :reveal {selected_button != 0}
                 :duration "250ms"
                 (confirm-button-list)
             )
