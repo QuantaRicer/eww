@@ -6,26 +6,25 @@
     background: rgba(90, 90, 90, 0.3);
 }
 
-.confirm-button{
-    border-radius: 8px;
-    background-color: #1a1a1a;
-    font-size: 30px;
-    color: #fafafa;
-}
-
+.confirm-button,
 .power-button {
-    &-dpms,
-    &-lock,
-    &-exit,
-    &-reboot,
-    &-poweroff {
-        border-radius: 8px;
+    background-color: #1a1a1a;
+    border-radius: 10px;
+    color: #fafafa;
+    &-focused {
         background-color: #1a1a1a;
-        font-size: 100px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 0px 2px #fafafa inset;
         color: #fafafa;
     }
+}
 
-    &-poweroff {
-        color: #d35d6e;
-    }
+.confirm-button,
+.confirm-button-focused {
+    font-size: 30px;
+}
+
+.power-button,
+.power-button-focused {
+    font-size: 100px;
 }

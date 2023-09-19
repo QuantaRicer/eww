@@ -1,29 +1,57 @@
 ;; Contants
-(defvar power_button_w 200)
-(defvar power_button_h 200)
-(defvar power_button_spacing 20)
+(defvar widget-name "power-overlay")
 
-(defvar confirm_button_w 530)
-(defvar confirm_button_h 100)
-(defvar confirm_button_spacing 20)
+(defvar PWR_BTN_W 200)
+(defvar PWR_BTN_H 200)
+(defvar PWR_BTN_SPACING 20)
 
-(defvar action_name "none")
+(defvar CONFIRM_BTN_W 530)
+(defvar CONFIRM_BTN_H 100)
+(defvar CONFIRM_BTN_SPACING 20)
+
+(defvar SELECTED_STYLE "background-color: #126589; box-shadow: 0px 0px 0px 3px #eaeaea inset;")
+;; Variables
+(defvar focused_button 0)
+(defvar selected_button 0)
 (defvar action_command "echo")
-(defvar confirm_action false)
+;; ----- Button ID -----
+;; NONE:    0
+;; DPMS:    1
+;; LOCK:    2
+;; EXIT:    3
+;; REBOOT:  4
+;; POWER:   5
+;; CONFIRM: 6
+;; DECLINE: 7
 
-(defwidget power-button [name action icon]
+(defwidget power-button [button-id label-icon addition-style command]
     (eventbox
-        :onhover ""
-        :onhoverlost ""
-        (box :class "power-button-${name}"
-            :style "${name == action_name ? "background-color: #125589;" : ""}"
+        :onhover "${EWW_CMD} update focused_button=${button-id}"
+        :onhoverlost "${EWW_CMD} update focused_button=0"
+        (box :class "power-button${button-id == focused_button ? "-focused" : ""}"
+            :style "${button-id == selected_button ? "${SELECTED_STYLE}" : ""}"
             (button
-                :width power_button_w
-                :height power_button_h
-                :onclick "${EWW_CMD} update action_command='${action}' \
-                    && ${EWW_CMD} update action_name=${name} \
-                    && ${EWW_CMD} update confirm_action=true"
-                "${icon}"
+                :width PWR_BTN_W
+                :height PWR_BTN_H
+                :style addition-style
+                :onclick "${EWW_CMD} update action_command='${command}' \
+                    && ${EWW_CMD} update selected_button=${button-id}"
+                "${label-icon}"
+            )
+        )
+    )
+)
+
+(defwidget confirm-button [button-id label onclick]
+    (eventbox
+        :onhover "${EWW_CMD} update focused_button=${button-id}"
+        :onhoverlost "${EWW_CMD} update focused_button=0"
+        (box :class "confirm-button${button-id == focused_button ? "-focused" : ""}"
+            (button
+                :width CONFIRM_BTN_W
+                :height CONFIRM_BTN_H
+                :onclick onclick
+                "${label}"
             )
         )
     )
@@ -33,31 +61,36 @@
     (box
         :orientation "h"
         :space-evenly false
-        :spacing power_button_spacing
+        :spacing PWR_BTN_SPACING
         (power-button
-            :name "dpms"
-            :action "hyprctl dispatch dpms off"
-            :icon "󰤄"
+            :button-id 1
+            :label-icon "󰤄"
+            :addition-style ""
+            :command "hyprctl dispatch dpms off"
         )
         (power-button
-            :name "lock"
-            :action ""
-            :icon ""
+            :button-id 2
+            :label-icon ""
+            :addition-style ""
+            :command ""
         )
         (power-button
-            :name "exit"
-            :action "hyprctl dispatch exit"
-            :icon "󰗼"
+            :button-id 3
+            :label-icon "󰗼"
+            :addition-style ""
+            :command "hyprctl dispatch exit"
         )
         (power-button
-            :name "reboot"
-            :action "systemctl reboot"
-            :icon ""
+            :button-id 4
+            :label-icon ""
+            :addition-style ""
+            :command "systemctl reboot"
         )
         (power-button
-            :name "poweroff"
-            :action "systemctl poweroff"
-            :icon "󰐥"
+            :button-id 5
+            :label-icon "󰐥"
+            :addition-style "color:#d35d6e;"
+            :command "systemctl poweroff"
         )
     )
 )
@@ -66,33 +99,19 @@
     (box
         :orientation "h"
         :space-evenly false
-        :spacing confirm_button_spacing
-        (eventbox
-            (box :class "confirm-button"
-                (button
-                    :width confirm_button_w
-                    :height confirm_button_h
-                    :onclick "${EWW_CMD} close power-overlay \
-                        && ${EWW_CMD} update action_name=none \
-                        && ${EWW_CMD} update confirm_action=false \
-                        && sleep 0.1 \
-                        && bash -c '${action_command}' \
-                        && ${EWW_CMD} update action_command=echo"
-                    "Sure"
-                )
-            )
+        :spacing CONFIRM_BTN_SPACING
+        (confirm-button
+            :button-id 6
+            :label "Confirm"
+            :onclick "${EWW_CMD} close power-overlay \
+                && ${EWW_CMD} update focused_button=0 \
+                && ${EWW_CMD} update selected_button=0 \
+                && ${action_command}"
         )
-        (eventbox
-            (box :class "confirm-button"
-                (button
-                    :width confirm_button_w
-                    :height confirm_button_h
-                    :onclick "${EWW_CMD} update action_command='echo' \
-                        && ${EWW_CMD} update action_name=none \
-                        && ${EWW_CMD} update confirm_action=false"
-                    "Nah"
-                )
-            )
+        (confirm-button
+            :button-id 7
+            :label "Decline"
+            :onclick "${EWW_CMD} update selected_button=0"
         )
     )
 )
@@ -100,9 +119,8 @@
 (defwidget power-menu []
     (eventbox 
         :onclick "${EWW_CMD} close power-overlay \
-            && ${EWW_CMD} update action_command=' ' \
-            && ${EWW_CMD} update action_name=none \
-            && ${EWW_CMD} update confirm_action=false"
+            && ${EWW_CMD} update focused_button=0 \
+            && ${EWW_CMD} update selected_button=0"
         :hexpand true
         :vexpand true
         (box :class "power-menu"
@@ -113,7 +131,7 @@
             :spacing 10
             (power-button-list)
             (revealer :transition "slidedown"
-                :reveal confirm_action
+                :reveal "${selected_button != 0}"
                 :duration "250ms"
                 (confirm-button-list)
             )
