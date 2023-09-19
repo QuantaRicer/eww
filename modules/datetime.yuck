@@ -5,7 +5,7 @@
    (box :class "date-time"
         :orientation "h"
         :space-evenly false
-        (label :class "datetime-label"
+        (label
             :text "${time}"
         )
    )

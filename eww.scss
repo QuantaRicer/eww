@@ -3,7 +3,11 @@
     font-family: "CodeNewRoman Nerd Font Mono";
 }
 
-/** tooltip!! **/
+// ---------------------------------- Global ----------------------------------
+.bar {
+    background-color: rgba(176, 176, 176, 0.3);
+}
+
 tooltip.background {
     background-color: #1f1f1f;
     border-radius: 8px;
@@ -15,95 +19,65 @@ tooltip label {
     margin: 6px;
 }
 
-.bar {
-    background-color: rgba(176, 176, 176, 0.3);
-}
-
+// ---------------------------------- Left section ----------------------------------
 .dashboard,
 .workspaces-widget,
-.date-time,
-.notification,
-.quick-control,
-.system-monitor-widget,
-.power-menu {
-    border-radius: 8px;
-    background-color: #2a2a2a;
-}
-
-.dashboard,
-.workspaces-widget,
-.date-time,
-.system-monitor-widget,
-.power-button {
-    padding: 0px 10px;
-    color: #eaeaea;
-}
-
-// Left section
-.dashboard {
-    font-size: 30px;
-}
-
 .workspace-button-active,
 .workspace-button-deactive {
-    padding: 0 5px;
-    font-size: 30px;
-}
-
-.workspace-button-deactive {
-    color: #7c7c7c;
-}
-
-.workspaces-widget {
-    background-color: #2a2a2a;
-}
-
-.window_title {
-    font-size: 18px;
-    color: #fafafa;
-}
-
-// Central section
-.datetime-label {
-    padding: 0px 5px;
-    font-size: 18px;
-}
-
-.notification {
-    padding: 0px 11px;
-    font-size: 30px;
-}
-
-// Right section
-.quick-control,
-.system-monitor-widget {
     padding: 0px 10px;
     background-color: #2a2a2a;
     border-radius: 8px;
+    color: #fafafa;
+    font-size: 30px;
 }
 
-.quick-control {
-    &-button {
-        padding: 0px 5px;
-        font-size: 20px;
+.workspace-button {
+    &-active {
+        padding: 0 5px;
+    }
+    &-deactive {
+        padding: 0 5px;
+        color: #7c7c7c;
     }
 }
 
-.system-monitor-widget {
+// ---------------------------------- Central section ----------------------------------
+.date-time,
+.notification {
+    padding: 0px 13px;
+    background-color: #2a2a2a;
+    border-radius: 8px;
+    color: #fafafa;
+    font-size: 30px;
+}
+
+.date-time {
+    font-size: 18px;
+}
+
+// ---------------------------------- Right section ----------------------------------
+.system-monitor-widget,
+.power-menu {
+    padding: 0px 10px;
+    background-color: #2a2a2a;
+    border-radius: 8px;
+    color: #fafafa;
+}
+
+.system-monitor-circular {
+    background-color: #5a5a5a;
+    color: #d35d6e;
 }
 
 .power-menu {
-    padding: 0px 5px;
-}
-
-.power-button {
+    padding: 0px 12px;
     font-size: 30px;
 }
 
 .left-widgets,
 .center-widgets,
 .right-widgets {
-    padding: 4px 0;
+    padding: 5px 0;
 }
 
 .left-widgets {
@@ -112,33 +86,4 @@ tooltip label {
 
 .right-widgets {
     margin-right: 10px;
-}
-
-.right-widgets slider {
-    color: #ffd5cd;
-}
-
-.metric {
-    font-size: 20px;
-    padding-left: 20px;
-}
-
-.metric scale trough highlight {
-    background-color: #D35D6E;
-    color: #000000;
-    border-radius: 10px;
-}
-
-.metric scale trough {
-    background-color: #4e4e4e;
-    border-radius: 50px;
-    min-height: 5px;
-    min-width: 50px;
-    margin-left: 10px;
-    margin-right: 20px;
-}
-
-.system-monitor-circular {
-    background-color: #5a5a5a;
-    color: #d35d6e;
 }

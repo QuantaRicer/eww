@@ -36,7 +36,6 @@
         :space-evenly false
         :spacing 5
         :halign "end"
-        (quick-control)
         (system-monitor-widget)
         (power-window)
     )

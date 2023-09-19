@@ -1,51 +1,6 @@
-(defvar power_reveal false)
-
-(defwidget power []
-    (eventbox 
-        :onhover "${EWW_CMD} update power_reveal=true"
-        :onhoverlost "${EWW_CMD} update power_reveal=false"
-        (box :class "power-menu"
-            :orientation "h"
-            :space-evenly false
-            (revealer :transition "slideright"
-                :reveal power_reveal
-                :duration "250ms"
-                (box :orientation "h"
-                    :space-evenly false
-                    (button :class "power-button"
-                        :onclick "systemctl poweroff"
-                        :tooltip "Power Off"
-                        "󰐥"
-                    )
-                    (button :class "power-button"
-                        :onclick "systemctl reboot"
-                        :tooltip "Restart"
-                        ""
-                    )
-                    (button :class "power-button"
-                        :onclick "hyprctl dispatch exit"
-                        :tooltip "Exit Hyprland"
-                        "󰗼"
-                    )
-                    (button :class "power-button"
-                        :onclick ""
-                        :tooltip "Lock"
-                        ""
-                    )
-                )
-            )
-            (button :class "power-button"
-                :onclick "hyprctl dispatch dpms off"
-                :tooltip "Sleep"
-                "󰤄"
-            )
-        )
-    )
-)
-
 (defwidget power-window []
     (box :class "power-menu"
-        (button :class "power-button"
+        (button
             :onclick "sleep 0.1 && eww -c ~/.config/eww/widgets/power-overlay open power-overlay"
             :tooltip "Power menu"
             "󰐥"
