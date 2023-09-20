@@ -66,31 +66,31 @@
             :button-id 1
             :label-icon "󰤄"
             :addition-style ""
-            :command "hyprctl dispatch dpms off"
+            :command "sleep 0.2 && hyprctl dispatch dpms off &"
         )
         (power-button
             :button-id 2
             :label-icon ""
-            :addition-style ""
-            :command ""
+            :addition-style "padding-right: 18px;"
+            :command "sleep 0.2 && swaylock &"
         )
         (power-button
             :button-id 3
             :label-icon "󰗼"
-            :addition-style ""
-            :command "hyprctl dispatch exit"
+            :addition-style "padding-right: 15px;"
+            :command "sleep 0.2 && hyprctl dispatch exit &"
         )
         (power-button
             :button-id 4
             :label-icon ""
-            :addition-style ""
-            :command "systemctl reboot"
+            :addition-style "padding-right: 18px;"
+            :command "sleep 0.2 && systemctl reboot &"
         )
         (power-button
             :button-id 5
             :label-icon "󰐥"
-            :addition-style "color:#d35d6e;"
-            :command "systemctl poweroff"
+            :addition-style "padding-right:15px; color:#d35d6e; font-size: 115px;"
+            :command "sleep 0.2 && systemctl poweroff &"
         )
     )
 )
