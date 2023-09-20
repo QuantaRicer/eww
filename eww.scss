@@ -1,67 +1,98 @@
+// ---------------------------------- Variable ----------------------------------
+$bg-color: #2a2a2a;
+$gl-padding: 0px 10px;
+$gl-radius: 8px;
+
+$text-fontsize: 18px;
+$text-color: #fafafa;
+$disabled-text-color: #7c7c7c;
+
+$button-padding: 0px 13px;
+$button-fontsize: 30px;
+
+$widget-padding: 5px 0px;
+$widget-margin: 10px;
+
+// ---------------------------------- Global ----------------------------------
 * {
     all: unset; //Unsets everything so you can style everything from scratch
     font-family: "CodeNewRoman Nerd Font Mono";
 }
 
-// ---------------------------------- Global ----------------------------------
 .bar {
     background-color: rgba(176, 176, 176, 0.3);
 }
 
+.left-widgets,
+.center-widgets,
+.right-widgets {
+    padding: $widget-padding;
+}
+
+.left-widgets {
+    margin-left: $widget-margin;
+}
+
+.right-widgets {
+    margin-right: $widget-margin;
+}
+
 tooltip.background {
     background-color: #1f1f1f;
-    border-radius: 8px;
-    font-size: 18;
+    border-radius: $gl-radius;
+    font-size: $text-fontsize;
     color: #bfc9db;
 }
 
 tooltip label {
-    margin: 6px;
+    margin: 5px;
 }
 
 // ---------------------------------- Left section ----------------------------------
-.dashboard,
-.workspaces-widget,
-.workspace-button-active,
-.workspace-button-deactive {
-    padding: 0px 10px;
-    background-color: #2a2a2a;
-    border-radius: 8px;
-    color: #fafafa;
-    font-size: 30px;
+.dashboard-button,
+.workspaces-widget {
+    padding: $gl-padding;
+    background-color: $bg-color;
+    border-radius: $gl-radius;
+    color: $text-color;
+    font-size: $button-fontsize;
 }
 
 .workspace-button {
     &-active {
-        padding: 0 5px;
+        padding: 0px 5px;
     }
     &-deactive {
-        padding: 0 5px;
-        color: #7c7c7c;
+        padding: 0px 5px;
+        color: $disabled-text-color;
     }
 }
 
 // ---------------------------------- Central section ----------------------------------
 .date-time,
-.notification {
-    padding: 0px 13px;
-    background-color: #2a2a2a;
-    border-radius: 8px;
-    color: #fafafa;
-    font-size: 30px;
+.noti-button {
+    background-color: $bg-color;
+    border-radius: $gl-radius;
+    color: $text-color;
 }
 
 .date-time {
-    font-size: 18px;
+    padding: $gl-padding;
+    font-size: $text-fontsize;
+}
+
+.noti-button {
+    padding: $button-padding;
+    font-size: $button-fontsize;
 }
 
 // ---------------------------------- Right section ----------------------------------
 .system-monitor-widget,
-.power-menu {
-    padding: 0px 10px;
-    background-color: #2a2a2a;
-    border-radius: 8px;
-    color: #fafafa;
+.power-button {
+    padding: $gl-padding;
+    background-color: $bg-color;
+    border-radius: $gl-radius;
+    color: $text-color;
 }
 
 .system-monitor-circular {
@@ -69,21 +100,7 @@ tooltip label {
     color: #d35d6e;
 }
 
-.power-menu {
-    padding: 0px 12px;
-    font-size: 30px;
-}
-
-.left-widgets,
-.center-widgets,
-.right-widgets {
-    padding: 5px 0;
-}
-
-.left-widgets {
-    margin-left: 10px;
-}
-
-.right-widgets {
-    margin-right: 10px;
+.power-button {
+    padding: $button-padding;
+    font-size: $button-fontsize;
 }

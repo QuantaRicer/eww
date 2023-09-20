@@ -9,7 +9,7 @@
 (defvar CONFIRM_BTN_H 100)
 (defvar CONFIRM_BTN_SPACING 20)
 
-(defvar SELECTED_STYLE "background-color: #126589; box-shadow: 0px 0px 0px 3px #eaeaea inset;")
+(defvar SELECTED_STYLE "background-color: #454545; box-shadow: 0px 0px 0px 3px #eaeaea inset;")
 ;; Variables
 (defvar focused_button 0)
 (defvar selected_button 0)
@@ -71,25 +71,25 @@
         (power-button
             :button-id 2
             :label-icon ""
-            :addition-style "padding-right: 18px;"
+            :addition-style ""
             :command "sleep 0.2 && swaylock &"
         )
         (power-button
             :button-id 3
             :label-icon "󰗼"
-            :addition-style "padding-right: 15px;"
+            :addition-style ""
             :command "sleep 0.2 && hyprctl dispatch exit &"
         )
         (power-button
             :button-id 4
             :label-icon ""
-            :addition-style "padding-right: 18px;"
+            :addition-style ""
             :command "sleep 0.2 && systemctl reboot &"
         )
         (power-button
             :button-id 5
             :label-icon "󰐥"
-            :addition-style "padding-right:15px; color:#d35d6e; font-size: 115px;"
+            :addition-style "color:#d35d6e;"
             :command "sleep 0.2 && systemctl poweroff &"
         )
     )
@@ -130,9 +130,9 @@
             :valign "center"
             :spacing 10
             (power-button-list)
-            (revealer :transition "slidedown"
+            (revealer :transition "slideup"
                 :reveal {selected_button != 0}
-                :duration "250ms"
+                :duration "200ms"
                 (confirm-button-list)
             )
         )
@@ -143,9 +143,6 @@
     :monitor 0
     :stacking "overlay"
     :focusable true
-    :geometry (geometry
-            :width "100%"
-            :height "100%"
-        )
+    :geometry (geometry :width "100%" :height "100%")
     (power-menu)
 )
