@@ -8,19 +8,17 @@
 }
 
 .control-menu {
-    margin-left: 100px;
+    margin-left: 50px;
 }
 
-.quick-access-button {
+.quick-access-button,
+.quick-access-button-focused {
     background-color: #1a1a1a;
     border-radius: 10px;
     color: #fafafa;
     font-size: 120px;
-    &-focused {
-        background-color: #1a1a1a;
-        border-radius: 10px;
-        color: #fafafa;
-        font-size: 120px;
-        box-shadow: 0px 0px 0px 2px #fafafa inset;
-    }
+}
+
+.quick-access-button-focused {
+    box-shadow: 0px 0px 0px 2px #fafafa inset;
 }
