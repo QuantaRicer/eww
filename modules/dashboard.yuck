@@ -1,9 +1,9 @@
 (defwidget dashboard []
-    (eventbox
-        :onlick ""
-        (box :class "dashboard-button"
-            :tooltip "Dashboard"
-            (label :text "󰣇")
+    (box
+        :tooltip "Dashboard"
+        (button :class "dashboard-button"
+            :onclick "sleep 0.1 && eww -c ~/.config/eww/widgets/quick-control open quick-control"
+            "󰣇"
         )
     )
 )

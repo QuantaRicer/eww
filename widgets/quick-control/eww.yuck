@@ -1,25 +1,90 @@
 ;; Contants
 (defvar widget-name "quick-control")
+(defvar BUTTON-SIZE 150)
 
 ;; Variables
-(defvar forcused_button 0)
+(defvar qcfb 0) ;; quick-control-focused-button
 ;; ----- BUTTON ID -----
 ;; NONE:    0
 
+
+(defwidget quick-access-button [btn-id ico style cmd]
+    (eventbox
+        :onhover "${EWW_CMD} update qcfb=${btn-id}"
+        :onhoverlost "${EWW_CMD} update qcfb=0"
+        (box
+            (button
+                :class "quick-access-button${btn-id == forcused_button ? "-focused" : ""}"
+                :width BUTTON-SIZE
+                :height BUTTON-SIZE
+                :style style
+                :onclick "${EWW_CMD} close ${widget-name} \
+                    && ${EWW_CMD} update qcfb=0 \
+                    && sleep 0.2 && ${cmd}"
+                ico
+            )
+        )
+    )
+)
 
 (defwidget quick-access []
     (box
         :orientation "v"
         :space-evenly false
         :spacing 5
+        (quick-access-button
+            :btn-id 1
+            :ico "󰖟"
+            :style ""
+            :cmd "brave"
+        )
+        (quick-access-button
+            :btn-id 2
+            :ico "󰉖"
+            :style ""
+            :cmd "nemo"
+        )
+        (quick-access-button
+            :btn-id 3
+            :ico ""
+            :style ""
+            :cmd "kitty"
+        )
+        (quick-access-button
+            :btn-id 4
+            :ico ""
+            :style "font-size: 100px;"
+            :cmd "blueman-manager"
+        )
+        (quick-access-button
+            :btn-id 5
+            :ico ""
+            :style ""
+            :cmd ""
+        )
+        (quick-access-button
+            :btn-id 6
+            :ico ""
+            :style ""
+            :cmd ""
+        )
     )
 )
 
 (defwidget control-menu []
-    (box
-        :orientation "h"
-        :space-evenly false
-        :spacing 5
+    (eventbox
+        :onclick "${EWW_CMD} close ${widget-name} \
+            && ${EWW_CMD} update qcfb=0"
+        :hexpand true
+        :vexpand true    
+        (box
+            :class "control-menu"
+            :orientation "h"
+            :space-evenly false
+            :spacing 5
+            :valign "center"
+            (quick-access)
+        )
     )
 )
 
@@ -28,5 +93,5 @@
     :stacking "overlay"
     :focusable "true"
     :geometry (geometry :width "100%" :height "100%")
-    control-menu
+    (control-menu)
 )

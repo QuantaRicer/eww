@@ -1,0 +1,3 @@
+(defwidget quick-access-button []
+    (eventbox)
+)
