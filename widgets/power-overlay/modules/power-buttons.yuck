@@ -28,7 +28,7 @@
             :button-id 1
             :label-icon "󰤄"
             :addition-style ""
-            :command "hyprctl dispatch dpms off"
+            :command "sleep 0.2 && hyprctl dispatch dpms off &"
         )
         (power-button
             :button-id 2

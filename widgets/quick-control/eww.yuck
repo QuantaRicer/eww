@@ -1,8 +1,8 @@
 (include "modules/quick-access.yuck")
+(include "modules/system-monitor.yuck")
 
 ;; Contants
 (defvar widget-name "quick-control")
-(defvar BUTTON-SIZE 150)
 
 ;; Variables
 (defvar focused_button 0) ;; quick-control-focused-button
@@ -18,8 +18,9 @@
             :class "control-menu"
             :orientation "h"
             :space-evenly false
-            :spacing 5
+            :spacing 10
             :valign "center"
+            (system-monitor)
             (quick-access)
         )
     )

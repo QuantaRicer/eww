@@ -1,3 +1,5 @@
+(defvar BUTTON-SIZE 150)
+
 (defwidget quick-access-button [btn-id ico style cmd]
     (eventbox
         :onhover "${EWW_CMD} update focused_button=${btn-id}"
@@ -23,7 +25,7 @@
     (box
         :orientation "v"
         :space-evenly false
-        :spacing 5
+        :spacing 10
         (quick-access-button
             :btn-id 1
             :ico "󰖟"

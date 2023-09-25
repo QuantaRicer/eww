@@ -12,7 +12,8 @@
 }
 
 .quick-access-button,
-.quick-access-button-focused {
+.quick-access-button-focused,
+.system-monitor-item {
     background-color: #1a1a1a;
     border-radius: 10px;
     color: #fafafa;
@@ -21,4 +22,22 @@
 
 .quick-access-button-focused {
     box-shadow: 0px 0px 0px 2px #fafafa inset;
+}
+
+.system-monitor-item {
+    font-size: 25px;
+    &-innerbox {
+        margin: 10px 0px 0px 0px;
+        padding: 10px 0px;
+    }
+    circular-progress {
+        background-color: #5a5a5a;
+        color: #d35d6e;
+        label {
+            color: #fafafa;
+        }
+    }
+    label {
+        margin-top: 5px;
+    }
 }
