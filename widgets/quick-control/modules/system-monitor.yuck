@@ -27,22 +27,31 @@
 
 (defwidget system-monitor []
     (box
-        :orientation "h"
+        :orientation "v"
         :space-evenly false
         :spacing 10
-        :vexpand true
-        :valign "start"
-        (system-monitor-item
-            :name "CPU"
-            :value {EWW_CPU.avg}
+        (box :class "system-monitor-title"
+            :width 470
+            :height 100
+            (label :text "System Monitoring")
         )
-        (system-monitor-item
-            :name "RAM"
-            :value {EWW_RAM.used_mem_perc}
-        )
-        (system-monitor-item
-            :name "DISK"
-            :value {round((1 - (EWW_DISK["/"].free / EWW_DISK["/"].total)) * 100, 1)}
+        (box
+            :orientation "h"
+            :space-evenly false
+            :spacing 10
+            :valign "start"
+            (system-monitor-item
+                :name "CPU"
+                :value {EWW_CPU.avg}
+            )
+            (system-monitor-item
+                :name "RAM"
+                :value {EWW_RAM.used_mem_perc}
+            )
+            (system-monitor-item
+                :name "DISK"
+                :value {round((1 - (EWW_DISK["/"].free / EWW_DISK["/"].total)) * 100, 1)}
+            )
         )
     )
 )
